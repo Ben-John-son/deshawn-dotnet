@@ -38,3 +38,31 @@ margin-top: 5%;
 #removeBTN {
   margin-top: 4%;
 }
+
+
+#walkerCards {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: center !important;
+  justify-items: center !important;
+ 
+margin-top: 5%;
+}
+
+.walkerCard {
+  width: 20%;
+  height: 20vh;
+}
+
+.walkerCard img {
+  height: 32vh;
+}
+
+
+.addWalkerBTN {
+  margin-top: 4%;
+}
+
+#removeBTN {
+  margin-top: 4%;
+}

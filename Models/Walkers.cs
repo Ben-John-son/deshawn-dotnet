@@ -6,6 +6,7 @@ public class Walker
 
   public string Name { get; set; }
   public int CityId { get; set; }
+  public string Picture { get; set; }
   public City City { get; set; }
   public Dog Dog { get; set; }
 }
