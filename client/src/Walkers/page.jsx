@@ -1,35 +1,35 @@
 import { useEffect, useState } from "react";
-import { getDogs } from "./apiManager";
+import { getWalkers } from "./apiManager";
 import { Card, Button, Dropdown } from "react-bootstrap"; // Make sure react-bootstrap is installed
 
-export default function Home() {
-  const [dogs, setDogs] = useState([]);
+export default function Walkers() {
+  const [walkers, setWalkers] = useState([]);
 
   useEffect(() => {
-    getDogs()
-      .then(setDogs)
+    getWalkers()
+      .then(setWalkers)
       .catch((error) => {
-        console.error("Failed to fetch dogs:", error);
+        console.error("Failed to fetch walkers:", error);
       });
   }, []);
 
   return (
-    <><div className="addDogBTN">
-      <Button>Add Dog</Button>
-    </div><div id="dogCards" className="d-flex flex-wrap gap-3 p-3">
-        {dogs.length > 0 ? (
-          dogs.map((dog) => (
-            <Card key={dog.id} className="dogCard">
-              <Card.Img variant="top" src={dog.picture} />
+    <><div className="addWalkerBTN">
+      <Button>Add Walker</Button>
+    </div><div id="walkerCards" className="d-flex flex-wrap gap-3 p-3">
+        {Walkers.length > 0 ? (
+          walkers.map((walker) => (
+            <Card key={walker.id} className="walkerCard">
+              <Card.Img variant="top" src={walker.picture} />
               <Card.Body>
                  <Dropdown>
       <Dropdown.Toggle variant="success" id="dropdown-basic">
-       {dog.name}
+       {walker.name}
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Header>Walkers</Dropdown.Header>
-        <Dropdown.Item>{dog.walker.name}</Dropdown.Item>
+        <Dropdown.Header>Dogs</Dropdown.Header>
+        <Dropdown.Item>name</Dropdown.Item>
        
       </Dropdown.Menu>
     </Dropdown>
@@ -42,7 +42,7 @@ export default function Home() {
             </Card>
           ))
         ) : (
-          <p>No dogs available.</p>
+          <p>No walkers available</p>
         )}
       </div></>
   );

@@ -1,7 +1,7 @@
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
-
+import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
             <NavbarBrand href="/">🐕‍🦺 🐩 DeShawn's Dog Walking</NavbarBrand>
             <NavItem>
               <NavLink href="/walkers">Walkers</NavLink>
+               {/* <NavLink href="/walkers">Cities</NavLink> */}
             </NavItem>
           </Nav>
         </Navbar>
