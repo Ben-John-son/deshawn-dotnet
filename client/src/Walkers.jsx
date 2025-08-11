@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { getWalkers } from "./apiManager";
-import { Card, Button, Dropdown } from "react-bootstrap"; // Make sure react-bootstrap is installed
+import { getWalkers, getCities } from "./apiManager";
+import { Card, Button, Dropdown, DropdownItem } from "react-bootstrap"; // Make sure react-bootstrap is installed
+import WalkerCard from "./Components/WalkerCard";
 
 export default function Walkers() {
   const [walkers, setWalkers] = useState([]);
-
+  const [cities, setCities] = useState([]);
   useEffect(() => {
     getWalkers()
       .then(setWalkers)
@@ -13,38 +14,34 @@ export default function Walkers() {
       });
   }, []);
 
+  useEffect(() =>
+  {
+    getCities().then(setCities)
+  },[]);
+
   return (
     <><div className="addWalkerBTN">
-      <Button>Add Walker</Button>
-    </div><div id="walkerCards" className="d-flex flex-wrap gap-3 p-3">
-        {walkers.length > 0 ? (
-          walkers.map((walker) => (
-            <Card key={walker.id} className="walkerCard">
-              <Card.Img variant="top" src={walker.picture} />
-              <Card.Body>
-                 <Dropdown>
+      <Button className="addWalker">Add Walker</Button>
+      
+      
+<Dropdown>
       <Dropdown.Toggle variant="success" id="dropdown-basic">
-       {walker.name}
+       Walkers by City
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Header>Dogs</Dropdown.Header>
-        <Dropdown.Item>name</Dropdown.Item>
+        
+        {cities.map((city) =>
+        (
+          <DropdownItem >{city.name}</DropdownItem>
+        ))}
        
       </Dropdown.Menu>
     </Dropdown>
-                {/* <Card.Text>
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
-                </Card.Text> */}
-                <Button id="removeBTN" variant="primary">Add Dog</Button>
-                <Button id="removeBTN" variant="primary">Remove</Button>
-              </Card.Body>
-            </Card>
-          ))
-        ) : (
-          <p>No walkers available</p>
-        )}
+      
+      
+    </div><div id="walkerCards" className="d-flex flex-wrap gap-3 p-3">
+        {walkers.map((walker) => <WalkerCard key={walker.id} walkerObj={walker}/>)}
       </div></>
   );
 }

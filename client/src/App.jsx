@@ -8,12 +8,14 @@ function App() {
   return (
     <div className="App">
       <>
-        <Navbar color="light" expand="md">
+        <Navbar id="navigate" color="light" expand="md">
           <Nav navbar>
             <NavbarBrand href="/">🐕‍🦺 🐩 DeShawn's Dog Walking</NavbarBrand>
             <NavItem>
               <NavLink href="/walkers">Walkers</NavLink>
-               {/* <NavLink href="/walkers">Cities</NavLink> */}
+            </NavItem>
+            <NavItem>
+              <NavLink href="/cities">Cities</NavLink>
             </NavItem>
           </Nav>
         </Navbar>
