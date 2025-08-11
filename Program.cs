@@ -254,4 +254,14 @@ app.MapGet("/api/walkers", () =>
         CityId = s.CityId
     });
 });
+
+app.MapGet("/api/cities", () =>
+{
+    return cities.Select(c => new CityDTO
+    {
+        Id = c.Id,
+        Name = c.Name,
+        State = c.State
+    });
+});
 app.Run();
