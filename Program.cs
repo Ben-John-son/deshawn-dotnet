@@ -119,7 +119,7 @@ List<Walker> walkers = new List<Walker>()
     {
         Id = 2,
         Name = "Magnus",
-        CityId = 2,
+        CityId = 3,
         Picture = "https://i.pinimg.com/474x/90/f9/93/90f99396412b31bcf4ce3974000915ca.jpg"
     },
     new Walker
@@ -140,7 +140,7 @@ List<Walker> walkers = new List<Walker>()
     {
         Id = 5,
         Name = "Konrad",
-        CityId = 7,
+        CityId = 5,
         Picture = "https://img.freepik.com/premium-vector/presenting-black-male-teacher-presenter-85_905719-2996.jpg",
        
     },
