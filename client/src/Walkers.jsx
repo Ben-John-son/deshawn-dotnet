@@ -6,13 +6,33 @@ import WalkerCard from "./Components/WalkerCard";
 export default function Walkers() {
   const [walkers, setWalkers] = useState([]);
   const [cities, setCities] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  
+  const getAllWalkers = () => {
+    getWalkers().then((data) => {
+      setWalkers(data);
+      setFiltered(data);
+    });
+  };
+
   useEffect(() => {
-    getWalkers()
-      .then(setWalkers)
-      .catch((error) => {
-        console.error("Failed to fetch walkers:", error);
-      });
+    getAllWalkers();
   }, []);
+
+const handleClick = (cityId) => {
+  if (cityId === "all") {
+    setFiltered(walkers);
+  } else {
+    setFiltered(walkers.filter((walker) => walker.cityId === cityId));
+  }
+};
+
+
+  // const handleAll = () => {
+   
+  //     setFiltered(walkers)
+    
+  // }
 
   useEffect(() =>
   {
@@ -22,6 +42,7 @@ export default function Walkers() {
   return (
     <><div className="addWalkerBTN">
       <Button className="addWalker">Add Walker</Button>
+      <Button onClick={() => handleClick("all")}>All Walkers</Button>
       
       
 <Dropdown>
@@ -33,7 +54,7 @@ export default function Walkers() {
         
         {cities.map((city) =>
         (
-          <DropdownItem >{city.name}</DropdownItem>
+          <DropdownItem key={city.id} onClick={() => handleClick(city.id)} id="filtered">{city.name}</DropdownItem>
         ))}
        
       </Dropdown.Menu>
@@ -41,7 +62,7 @@ export default function Walkers() {
       
       
     </div><div id="walkerCards" className="d-flex flex-wrap gap-3 p-3">
-        {walkers.map((walker) => <WalkerCard key={walker.id} walkerObj={walker}/>)}
+        {filtered.map((walker) => <WalkerCard key={walker.id} walkerObj={walker}/>)}
       </div></>
   );
 }
