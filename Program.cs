@@ -246,6 +246,10 @@ foreach (var walker in walkers)
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+});
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -324,6 +328,24 @@ app.MapPost("/api/walkers/{walkerId}/dogs/{dogId}", (int walkerId,int dogId) =>
 
 dog.WalkerId = walkerId;
     return Results.Ok(dog);
+});
+
+
+app.MapPost("/api/newDog", (Dog dog) =>
+{
+    if (dog == null)
+        return Results.BadRequest("Dog object is null");
+
+    dog.Id = dogs.Any() ? dogs.Max(d => d.Id) + 1 : 1;
+    dogs.Add(dog);
+
+    return Results.Created($"/newDog/{dog.Id}", new DogDTO
+    {
+        Id = dog.Id,
+        Name = dog.Name,
+        Picture = dog.Picture,
+        CityId = dog.CityId
+    });
 });
 
 
