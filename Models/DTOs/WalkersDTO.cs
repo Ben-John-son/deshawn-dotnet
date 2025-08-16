@@ -7,6 +7,6 @@ public string Picture { get; set; }
   public string Name { get; set; }
   public int CityId { get; set; }
   
-  public DogDTO Dogs { get; set; }
+  public List<DogDTO> Dogs { get; set; } = new();
   public CityDTO Cities { get; set; }
 }

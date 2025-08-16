@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { getDogs } from "./apiManager";
-import { Card, Button, Dropdown } from "react-bootstrap"; // Make sure react-bootstrap is installed
+import { getDogs, getWalkers } from "./apiManager";
+import { Card, Button, Dropdown, DropdownItem } from "react-bootstrap"; // Make sure react-bootstrap is installed
 
 export default function Home() {
   const [dogs, setDogs] = useState([]);
+  const [dogWalker, setDogWalker] = useState([]);
 
   useEffect(() => {
     getDogs()
-      .then(setDogs)
+      .then(setDogs).then(getWalkers).then(setDogWalker)
       .catch((error) => {
         console.error("Failed to fetch dogs:", error);
       });
@@ -28,8 +29,13 @@ export default function Home() {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Header>Walkers</Dropdown.Header>
-        <Dropdown.Item>{dog.walker.name}</Dropdown.Item>
+        <Dropdown.Header>Walker</Dropdown.Header>
+        {dogWalker.filter((walker) => walker.id == dog.walkerId).map((walk) => (
+          <DropdownItem>{walk.name}</DropdownItem>
+        ))
+        }
+        
+      
        
       </Dropdown.Menu>
     </Dropdown>

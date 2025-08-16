@@ -17,3 +17,19 @@ export const getCities = async () => {
   const res = await fetch("/api/cities");
   return res.json();
 }
+
+export const assignDog = async (walkerId, dogId) => {
+  const res = await fetch(`/api/walkers/${walkerId}/dogs/${dogId}`, {
+    method: "POST", 
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Failed to assign dog: ${res.status} ${text}`);
+  }
+
+  return res.json(); 
+};
