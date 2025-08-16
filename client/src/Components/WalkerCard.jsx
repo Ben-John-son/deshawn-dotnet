@@ -1,30 +1,60 @@
-import React from "react";
-import { Card, Dropdown, DropdownItem, Button } from "react-bootstrap";
-
+import React, { useEffect, useState } from "react";
+import { Card, Dropdown, DropdownItem } from "react-bootstrap";
+import { getDogs, assignDog } from "../apiManager";
 
 export default function WalkerCard({ walkerObj }) {
+  const [dogs, setDogs] = useState([]);
+
+  useEffect(() => {
+    getDogs().then(setDogs);
+  }, []);
+
+  const handleClick = (dogId) => {
+    assignDog(walkerObj.id, dogId).then(() => {
+      setDogs((prevDogs) =>
+        prevDogs.map((d) =>
+          d.id === dogId ? { ...d, walkerId: walkerObj.id } : d
+        )
+      );
+    });
+  };
+
   return (
     <Card key={walkerObj.id} className="walkerCard">
-              <Card.Img variant="top" src={walkerObj.picture} />
-              <Card.Body>
-                 <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-       {walkerObj.name}
-      </Dropdown.Toggle>
+      <Card.Img variant="top" src={walkerObj.picture} />
+      <Card.Body>
+    
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-current">
+            {walkerObj.name} - Currently Walking
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Header>Dogs</Dropdown.Header>
+            {dogs.filter((d) => d.walkerId === walkerObj.id).map((dog) => (
+              <DropdownItem key={dog.id}>{dog.name}</DropdownItem>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
 
-      <Dropdown.Menu>
-        <Dropdown.Header>Dogs</Dropdown.Header>
-        <Dropdown.Item>name</Dropdown.Item>
-       
-      </Dropdown.Menu>
-    </Dropdown>
-                {/* <Card.Text>
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
-                </Card.Text> */}
-                <Button id="removeBTN" variant="primary">Add Dog</Button>
-                <Button id="removeBTN" variant="primary">Remove</Button>
-              </Card.Body>
-            </Card>
-  )
+        
+        <Dropdown>
+          <Dropdown.Toggle variant="primary" id="dropdown-add">
+            Add Dog
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Header>Available Dogs</Dropdown.Header>
+            {dogs
+              .filter(
+                (d) => d.cityId === walkerObj.cityId && d.walkerId !== walkerObj.id
+              )
+              .map((dog) => (
+                <DropdownItem key={dog.id} onClick={() => handleClick(dog.id)}>
+                  {dog.name}
+                </DropdownItem>
+              ))}
+          </Dropdown.Menu>
+        </Dropdown>
+      </Card.Body>
+    </Card>
+  );
 }

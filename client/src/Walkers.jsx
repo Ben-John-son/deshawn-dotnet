@@ -28,11 +28,7 @@ const handleClick = (cityId) => {
 };
 
 
-  // const handleAll = () => {
-   
-  //     setFiltered(walkers)
-    
-  // }
+  
 
   useEffect(() =>
   {
