@@ -33,3 +33,19 @@ export const assignDog = async (walkerId, dogId) => {
 
   return res.json(); 
 };
+
+export const addDog = async (dog) => {
+  const res = await fetch("/api/newDog", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dog), // <-- send the form data as JSON
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to add dog");
+  }
+
+  return res.json();
+};

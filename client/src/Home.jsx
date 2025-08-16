@@ -1,55 +1,71 @@
 import { useEffect, useState } from "react";
-import { getDogs, getWalkers } from "./apiManager";
-import { Card, Button, Dropdown, DropdownItem } from "react-bootstrap"; // Make sure react-bootstrap is installed
+import { getDogs, getWalkers, addDog } from "./apiManager";
+import { Card, Button, Dropdown, DropdownItem, Form } from "react-bootstrap";
+import NewDog from "./Components/DogForm";
 
 export default function Home() {
   const [dogs, setDogs] = useState([]);
   const [dogWalker, setDogWalker] = useState([]);
+  const [formVisible, setFormVisible] = useState(false);
+  // const [cities, setCities] = useState([]);
 
   useEffect(() => {
     getDogs()
-      .then(setDogs).then(getWalkers).then(setDogWalker)
+      .then(setDogs)
+      .then(() => getWalkers().then(setDogWalker))
       .catch((error) => {
-        console.error("Failed to fetch dogs:", error);
+        console.error("Failed to fetch dogs or walkers:", error);
       });
   }, []);
 
+
+
+
   return (
-    <><div className="addDogBTN">
-      <Button>Add Dog</Button>
-    </div><div id="dogCards" className="d-flex flex-wrap gap-3 p-3">
+    <>
+      <div className="addDogBTN mb-3">
+        <Button onClick={() => setFormVisible(!formVisible)}>
+          {formVisible ? "Hide Form" : "Add Dog"}
+        </Button>
+      </div>
+
+{formVisible && (
+  <NewDog
+    onAdded={(newDog) => setDogs((prev) => [...prev, newDog])}
+  />
+)}
+
+      <div id="dogCards" className="d-flex flex-wrap gap-3 p-3">
         {dogs.length > 0 ? (
           dogs.map((dog) => (
             <Card key={dog.id} className="dogCard">
               <Card.Img variant="top" src={dog.picture} />
               <Card.Body>
-                 <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-       {dog.name}
-      </Dropdown.Toggle>
+                <Dropdown>
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    {dog.name}
+                  </Dropdown.Toggle>
 
-      <Dropdown.Menu>
-        <Dropdown.Header>Walker</Dropdown.Header>
-        {dogWalker.filter((walker) => walker.id == dog.walkerId).map((walk) => (
-          <DropdownItem>{walk.name}</DropdownItem>
-        ))
-        }
-        
-      
-       
-      </Dropdown.Menu>
-    </Dropdown>
-                {/* <Card.Text>
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
-                </Card.Text> */}
-                <Button id="removeBTN" variant="primary">Remove</Button>
+                  <Dropdown.Menu>
+                    <Dropdown.Header>Walker</Dropdown.Header>
+                    {dogWalker
+                      .filter((walker) => walker.id === dog.walkerId)
+                      .map((walk) => (
+                        <DropdownItem key={walk.id}>{walk.name}</DropdownItem>
+                      ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+
+                <Button id="removeBTN" variant="primary">
+                  Remove
+                </Button>
               </Card.Body>
             </Card>
           ))
         ) : (
           <p>No dogs available.</p>
         )}
-      </div></>
+      </div>
+    </>
   );
 }
