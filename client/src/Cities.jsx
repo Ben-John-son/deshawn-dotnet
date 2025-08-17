@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { getCities } from "./apiManager";
-import { Card, Button, Dropdown } from "react-bootstrap"; // Make sure react-bootstrap is installed
+import { Button } from "react-bootstrap";
+import CityForm from "./Components/CityForm"; // ✅ correct import
 
 export default function Cities() {
   const [cities, setCities] = useState([]);
+  const [formVisible, setFormVisible] = useState(false);
 
   useEffect(() => {
     getCities()
@@ -13,13 +15,29 @@ export default function Cities() {
       });
   }, []);
 
+  // ✅ add new city to list
+  const handleCityAdded = (newCity) => {
+    setCities((prev) => [...prev, newCity]);
+    setFormVisible(false); // optionally hide form after add
+  };
+
   return (
-    <><div>
+    <div>
       <Button>Cities</Button>
-      <Button>Add City</Button>
-      {cities.map(city =>
-        <h2>{city.name}, {city.state}</h2>
-      )}
-      </div></>
+
+      <div className="addDogBTN mb-3">
+        <Button onClick={() => setFormVisible(!formVisible)}>
+          {formVisible ? "Hide Form" : "Add City"}
+        </Button>
+      </div>
+
+      {formVisible && <CityForm onAdded={handleCityAdded} />}
+
+      {cities.map((city) => (
+        <h2 key={city.Id}>
+          {city.name}, {city.state}
+        </h2>
+      ))}
+    </div>
   );
 }

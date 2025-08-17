@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getDogs, getWalkers, addDog } from "./apiManager";
+import { getDogs, getWalkers, addDog, deleteDog } from "./apiManager";
 import { Card, Button, Dropdown, DropdownItem, Form } from "react-bootstrap";
 import NewDog from "./Components/DogForm";
 
@@ -7,7 +7,7 @@ export default function Home() {
   const [dogs, setDogs] = useState([]);
   const [dogWalker, setDogWalker] = useState([]);
   const [formVisible, setFormVisible] = useState(false);
-  // const [cities, setCities] = useState([]);
+ 
 
   useEffect(() => {
     getDogs()
@@ -18,9 +18,6 @@ export default function Home() {
       });
   }, []);
 
-
-
-
   return (
     <>
       <div className="addDogBTN mb-3">
@@ -29,11 +26,9 @@ export default function Home() {
         </Button>
       </div>
 
-{formVisible && (
-  <NewDog
-    onAdded={(newDog) => setDogs((prev) => [...prev, newDog])}
-  />
-)}
+      {formVisible && (
+        <NewDog onAdded={(newDog) => setDogs((prev) => [...prev, newDog])} />
+      )}
 
       <div id="dogCards" className="d-flex flex-wrap gap-3 p-3">
         {dogs.length > 0 ? (
@@ -56,7 +51,18 @@ export default function Home() {
                   </Dropdown.Menu>
                 </Dropdown>
 
-                <Button id="removeBTN" variant="primary">
+                <Button
+                  id="removeBTN"
+                  variant="primary"
+                  onClick={async () => {
+                    try {
+                      await deleteDog(dog.id);
+                      setDogs((prev) => prev.filter((d) => d.id !== dog.id));
+                    } catch (err) {
+                      console.error("Failed:", err);
+                    }
+                  }}
+                >
                   Remove
                 </Button>
               </Card.Body>
