@@ -49,3 +49,35 @@ export const addDog = async (dog) => {
 
   return res.json();
 };
+
+export const addCity = async (city) => {
+  const res = await fetch("/api/newCity", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(city), 
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to add city");
+  }
+
+  return res.json();
+};
+
+
+
+
+export const deleteDog = async (id) => {
+  const res = await fetch(`api/dog/${id}`, {
+    method: "DELETE",
+  });
+};
+
+// 🚶 Delete Walker
+export const deleteWalker = async (id) => {
+  const res = await fetch(`/api/walker/${id}`, {
+    method: "DELETE",
+  });
+};

@@ -348,6 +348,40 @@ app.MapPost("/api/newDog", (Dog dog) =>
     });
 });
 
+app.MapPost("/api/newCity", (City city) =>
+{
+    city.Id = cities.Any() ? cities.Max(c => c.Id) + 1 : 1;
+    cities.Add(city);
+    return Results.Created($"/newCity/{city.Id}", new CityDTO
+    {
+        Id = city.Id,
+        Name = city.Name,
+        State = city.State
+    });
+});
+
+
+app.MapDelete("/api/dog/{id}", (int id) =>
+{
+    for (int i = 0; i < dogs.Count; i++)
+    {
+        if (dogs[i].Id == id)
+        {
+            dogs.RemoveAt(i);
+        }
+    }
+});
+
+app.MapDelete("/api/walker/{id}", (int id) =>
+{
+  for (int i = 0; i < walkers.Count; i++)
+    {
+        if (walkers[i].Id == id)
+        {
+            walkers.RemoveAt(i);
+        }
+    }
+});
 
 
 app.Run();
