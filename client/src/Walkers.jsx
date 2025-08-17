@@ -7,7 +7,7 @@ export default function Walkers() {
   const [walkers, setWalkers] = useState([]);
   const [cities, setCities] = useState([]);
   const [filtered, setFiltered] = useState([]);
-  
+
   const getAllWalkers = () => {
     getWalkers().then((data) => {
       setWalkers(data);
@@ -19,46 +19,54 @@ export default function Walkers() {
     getAllWalkers();
   }, []);
 
-const handleClick = (cityId) => {
-  if (cityId === "all") {
-    setFiltered(walkers);
-  } else {
-    setFiltered(walkers.filter((walker) => walker.cityId === cityId));
-  }
-};
+  const handleClick = (cityId) => {
+    if (cityId === "all") {
+      setFiltered(walkers);
+    } else {
+      setFiltered(walkers.filter((walker) => walker.cityId === cityId));
+    }
+  };
 
-
-  
-
-  useEffect(() =>
-  {
-    getCities().then(setCities)
-  },[]);
+  useEffect(() => {
+    getCities().then(setCities);
+  }, []);
 
   return (
-    <><div className="addWalkerBTN">
-      <Button className="addWalker">Add Walker</Button>
-      <Button onClick={() => handleClick("all")}>All Walkers</Button>
-      
-      
-<Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-       Walkers by City
-      </Dropdown.Toggle>
+    <>
+      <div className="addWalkerBTN">
+        <Button className="addWalker">Add Walker</Button>
+        <Button onClick={() => handleClick("all")}>All Walkers</Button>
 
-      <Dropdown.Menu>
-        
-        {cities.map((city) =>
-        (
-          <DropdownItem key={city.id} onClick={() => handleClick(city.id)} id="filtered">{city.name}</DropdownItem>
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Walkers by City
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            {cities.map((city) => (
+              <DropdownItem
+                key={city.id}
+                onClick={() => handleClick(city.id)}
+                id="filtered"
+              >
+                {city.name}
+              </DropdownItem>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
+      <div id="walkerCards" className="d-flex flex-wrap gap-3 p-3">
+        {filtered.map((walker) => (
+          <WalkerCard
+            key={walker.id}
+            walkerObj={walker}
+            onDelete={(id) => {
+              setWalkers((prev) => prev.filter((w) => w.id !== id));
+              setFiltered((prev) => prev.filter((w) => w.id !== id));
+            }}
+          />
         ))}
-       
-      </Dropdown.Menu>
-    </Dropdown>
-      
-      
-    </div><div id="walkerCards" className="d-flex flex-wrap gap-3 p-3">
-        {filtered.map((walker) => <WalkerCard key={walker.id} walkerObj={walker}/>)}
-      </div></>
+      </div>
+    </>
   );
 }
