@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Card, Dropdown, DropdownItem, Button } from "react-bootstrap";
-import { getDogs, assignDog, deleteWalker } from "../apiManager";
+import {
+  Card,
+  Dropdown,
+  DropdownItem,
+  Button,
+  DropdownHeader,
+  Modal
+} from "react-bootstrap";
+import { getDogs, assignDog, deleteWalker, getCities } from "../apiManager";
+import WalkerForm from "./EditWalker";
 
 export default function WalkerCard({ walkerObj, onDelete }) {
   const [dogs, setDogs] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-    getDogs().then(setDogs);
+    getDogs().then(setDogs).then(getCities).then(setCities);
   }, []);
 
   const handleClick = (dogId) => {
@@ -18,6 +28,25 @@ export default function WalkerCard({ walkerObj, onDelete }) {
       );
     });
   };
+  const handleSaveWalker = (updatedWalker) => {
+  fetch(`/api/editWalker/${updatedWalker.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(updatedWalker)
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error("Failed to update walker");
+      return res.json();
+    })
+    .then((updated) => {
+    
+      console.log("Walker updated:", updated);
+      setShowForm(false); 
+    })
+    .catch((err) => console.error(err));
+};
 
   return (
     <Card key={walkerObj.id} className="walkerCard">
@@ -25,7 +54,7 @@ export default function WalkerCard({ walkerObj, onDelete }) {
       <Card.Body>
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-current">
-            {walkerObj.name} - Currently Walking
+            {walkerObj.name}
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Header>Dogs</Dropdown.Header>
@@ -34,6 +63,9 @@ export default function WalkerCard({ walkerObj, onDelete }) {
               .map((dog) => (
                 <DropdownItem key={dog.id}>{dog.name}</DropdownItem>
               ))}
+            <DropdownItem onClick={() => setShowForm(true)}>
+              Edit Walker
+            </DropdownItem>
           </Dropdown.Menu>
         </Dropdown>
 
@@ -55,6 +87,7 @@ export default function WalkerCard({ walkerObj, onDelete }) {
               ))}
           </Dropdown.Menu>
         </Dropdown>
+
         <Button
           id="removeBTN"
           variant="primary"
@@ -65,6 +98,23 @@ export default function WalkerCard({ walkerObj, onDelete }) {
           Remove
         </Button>
       </Card.Body>
+
+      <Modal show={showForm} onHide={() => setShowForm(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Walker</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <WalkerForm walker={walkerObj} cities={cities} onSave={handleSaveWalker}/>
+        </Modal.Body>
+        {/* <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowForm(false)}>
+            Cancel
+          </Button>
+          <Button variant="primary">
+            Save Changes
+          </Button>
+        </Modal.Footer> */}
+      </Modal>
     </Card>
   );
 }

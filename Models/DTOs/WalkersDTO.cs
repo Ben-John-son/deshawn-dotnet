@@ -8,5 +8,5 @@ public string Picture { get; set; }
   public int CityId { get; set; }
   
   public List<DogDTO> Dogs { get; set; } = new();
-  public CityDTO Cities { get; set; }
+  public List<CityDTO> Cities { get; set; } = new();
 }
