@@ -34,7 +34,6 @@ export default function Walkers() {
   return (
     <>
       <div className="addWalkerBTN">
-        <Button className="addWalker">Add Walker</Button>
         <Button onClick={() => handleClick("all")}>All Walkers</Button>
 
         <Dropdown>

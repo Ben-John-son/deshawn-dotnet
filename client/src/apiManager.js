@@ -81,3 +81,10 @@ export const deleteWalker = async (id) => {
     method: "DELETE",
   });
 };
+
+
+export const editWalker = async (id) => {
+  const res = await fetch( `/api/editWalker/${id}`, {
+    method: "PUT",
+  });
+};

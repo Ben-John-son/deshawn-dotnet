@@ -149,37 +149,94 @@ List<Walker> walkers = new List<Walker>()
         Id = 1,
         Name = "Horus",
         CityId = 3,
-        Picture = "https://media.istockphoto.com/id/1479694777/vector/bald-man-portrait-vector-illustration.jpg?s=612x612&w=0&k=20&c=DqQZ6x-_jU1bS9w7UJXiRPdURR_m5FfuFujjYCnTo1E="
+        Picture = "https://media.istockphoto.com/id/1479694777/vector/bald-man-portrait-vector-illustration.jpg?s=612x612&w=0&k=20&c=DqQZ6x-_jU1bS9w7UJXiRPdURR_m5FfuFujjYCnTo1E=",
+        Cities = {
+            new City
+            {
+                Id = 2,
+                Name = "Nashville",
+                State = "Tennessee"
+            },
+             new City
+            {
+                Id = 1,
+                Name = "Cookeville",
+                State = "Tennessee"
+            }
+        }
     },
-       
+
      new Walker
     {
         Id = 2,
         Name = "Magnus",
         CityId = 2,
-        Picture = "https://i.pinimg.com/474x/90/f9/93/90f99396412b31bcf4ce3974000915ca.jpg"
+        Picture = "https://i.pinimg.com/474x/90/f9/93/90f99396412b31bcf4ce3974000915ca.jpg",
+          Cities = {
+            new City
+            {
+                Id = 8,
+                Name = "Topeka",
+                State = "Kansas"
+            },
+             new City
+            {
+                Id = 7,
+                Name = "Detroit",
+                State = "Michigan"
+            }
+        }
     },
     new Walker
     {
         Id = 3,
         Name = "Mortarion",
         CityId = 6,
-        Picture = "https://img.freepik.com/premium-vector/professional-man-cartoon-vector-illustration-isolated-white-background_1322206-68158.jpg"
-        
+        Picture = "https://img.freepik.com/premium-vector/professional-man-cartoon-vector-illustration-isolated-white-background_1322206-68158.jpg",
+          Cities = {
+            new City
+            {
+                Id = 3,
+                Name = "Atlanta",
+                State = "Georgia"
+        }
+        }
     },
      new Walker
     {
         Id = 4,
         Name = "Sanguinius",
         CityId = 4,
-        Picture = "https://i.pinimg.com/564x/a0/10/5c/a0105c9b38b1f5bdcc6743710cccfdcf.jpg"
+        Picture = "https://i.pinimg.com/564x/a0/10/5c/a0105c9b38b1f5bdcc6743710cccfdcf.jpg",
+          Cities = {
+            new City
+            {
+                Id = 5,
+                Name = "Louisville",
+                State = "Kentucky"
+            },
+             new City
+            {
+                Id = 2,
+                Name = "Nashville",
+                State = "Tennessee"
+            }
+        }
     },
     new Walker
     {
         Id = 5,
         Name = "Konrad",
         CityId = 7,
-        Picture = "https://img.freepik.com/premium-vector/presenting-black-male-teacher-presenter-85_905719-2996.jpg"
+        Picture = "https://img.freepik.com/premium-vector/presenting-black-male-teacher-presenter-85_905719-2996.jpg",
+         Cities = {
+            new City
+            {
+                Id = 3,
+                Name = "Atlanta",
+                State = "Georgia"
+        }
+        }
     },
     new Walker
     {
@@ -187,7 +244,21 @@ List<Walker> walkers = new List<Walker>()
         Name = "Angron",
         CityId = 5,
         Picture = "https://previews.123rf.com/images/jemastock/jemastock1702/jemastock170205794/71772487-man-wearing-a-hat-cartoon-icon-over-white-background-colorful-design-vector-illustration.jpg",
-      
+          Cities = {
+            new City
+            {
+                Id = 2,
+                Name = "Nashville",
+                State = "Tennessee"
+            },
+             new City
+            {
+                Id = 1,
+                Name = "Cookeville",
+                State = "Tennessee"
+            }
+        }
+
     },
     new Walker
     {
@@ -195,7 +266,21 @@ List<Walker> walkers = new List<Walker>()
         Name = "Lionel",
         CityId = 2,
         Picture = "https://static.vecteezy.com/system/resources/previews/014/318/872/non_2x/bearded-middle-aged-man-icon-cartoon-style-vector.jpg",
-      
+          Cities = {
+            new City
+            {
+                Id = 2,
+                Name = "Nashville",
+                State = "Tennessee"
+            },
+             new City
+            {
+                Id = 1,
+                Name = "Cookeville",
+                State = "Tennessee"
+            }
+        }
+
     },
     new Walker
     {
@@ -203,7 +288,20 @@ List<Walker> walkers = new List<Walker>()
         Name = "Celestine",
         CityId = 3,
         Picture = "https://i.pinimg.com/736x/a0/28/9d/a0289d899e1022d5c7489030c8312ec0.jpg",
-      
+          Cities = {
+            new City
+            {
+                Id = 8,
+                Name = "Topeka",
+                State = "Kansas"
+            },
+             new City
+            {
+                Id = 7,
+                Name = "Detroit",
+                State = "Michigan"
+            }
+        }
     },
      new Walker
     {
@@ -211,7 +309,20 @@ List<Walker> walkers = new List<Walker>()
         Name = "Cassia",
         CityId = 2,
         Picture = "https://img.freepik.com/free-vector/smiling-woman-with-floral-dress_1308-174428.jpg?semt=ais_hybrid&w=740&q=80",
-      
+Cities = {
+            new City
+            {
+                Id = 8,
+                Name = "Topeka",
+                State = "Kansas"
+            },
+             new City
+            {
+                Id = 7,
+                Name = "Detroit",
+                State = "Michigan"
+            }
+        }
     },
      new Walker
     {
@@ -219,14 +330,41 @@ List<Walker> walkers = new List<Walker>()
         Name = "Idira",
         CityId = 7,
         Picture = "https://img.freepik.com/premium-vector/vector-beautiful-woman-with-shocked-expression-surprised-smile_844724-3525.jpg",
-       
+Cities = {
+            new City
+            {
+                Id = 8,
+                Name = "Topeka",
+                State = "Kansas"
+            },
+             new City
+            {
+                Id = 7,
+                Name = "Detroit",
+                State = "Michigan"
+            }
+        }
     },
      new Walker
     {
         Id = 11,
         Name = "Severina",
         CityId = 1,
-        Picture = "https://thumbs.dreamstime.com/b/confident-black-woman-cartoon-character-fashionable-outfit-standing-strong-illustration-clothes-hands-hips-378947978.jpg"
+        Picture = "https://thumbs.dreamstime.com/b/confident-black-woman-cartoon-character-fashionable-outfit-standing-strong-illustration-clothes-hands-hips-378947978.jpg",
+          Cities = {
+            new City
+            {
+                Id = 8,
+                Name = "Topeka",
+                State = "Kansas"
+            },
+             new City
+            {
+                Id = 7,
+                Name = "Detroit",
+                State = "Michigan"
+            }
+        }
     },
      new Walker
     {
@@ -234,15 +372,37 @@ List<Walker> walkers = new List<Walker>()
         Name = "Amalia",
         CityId = 4,
         Picture = "https://img.freepik.com/premium-vector/young-woman-with-gentle-smile-wearing-pastel-pink-shirt-blue-overalls_995281-805.jpg",
-       
+         Cities = {
+            new City
+            {
+                Id = 8,
+                Name = "Topeka",
+                State = "Kansas"
+            },
+             new City
+            {
+                Id = 7,
+                Name = "Detroit",
+                State = "Michigan"
+            }
+        }
     },
 };
+
+List<WalkerCityDTO> walkerCities = walkers
+    .Select(w => new WalkerCityDTO
+    {
+        WalkerId = w.Id,
+        CityId = w.CityId
+    })
+    .ToList();
 
 
 foreach (var walker in walkers)
 {
     walker.Dogs = dogs.Where(d => d.WalkerId == walker.Id).ToList();
-};
+}
+;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -307,6 +467,12 @@ app.MapGet("/api/walkers", () =>
             Id = d.Id,
             Name = d.Name,
             WalkerId = d.WalkerId
+        }).ToList(),
+        Cities = s.Cities.Select(c => new CityDTO
+        {
+            Id = c.Id,
+            Name = c.Name,
+            State = c.State
         }).ToList()
     });
 });
@@ -381,6 +547,64 @@ app.MapDelete("/api/walker/{id}", (int id) =>
             walkers.RemoveAt(i);
         }
     }
+});
+
+
+// app.MapPut("/api/editWalker/{id}", (int id) =>
+// {
+//     Walker walker = walkers.FirstOrDefault(wa => wa.Id == id);
+
+
+//     List<WalkerCityDTO> walkerCitiesForWalker1 = walkerCities.Where(wc => wc.WalkerId == id).ToList();
+
+//     List<City> citiesFor1 = walkerCitiesForWalker1.Select(wc => cities.First(c => c.Id == wc.CityId)).ToList();
+//     var  walkersCities =  walkerCities.Where(wc => wc.WalkerId != walker.Id).ToList(); 
+
+//     foreach (City city in walker.Cities)
+// {
+//     WalkerCityDTO newWC = new WalkerCityDTO
+//     {
+//         WalkerId = walker.Id,
+//         CityId = city.Id
+//     };
+//     newWC.Id = walkerCities.Count > 0 ? walkerCities.Max(wc => wc.Id) + 1 : 1;
+//     walkerCities.Add(newWC);
+// }
+
+// });
+
+app.MapPut("/api/editWalker/{id}", (int id, WalkerDTO updatedWalker) =>
+{
+    
+    var walker = walkers.FirstOrDefault(w => w.Id == id);
+    walker.Name = updatedWalker.Name;
+    walker.Picture = updatedWalker.Picture;
+    walker.CityId = updatedWalker.CityId;
+
+   
+    walkerCities.RemoveAll(wc => wc.WalkerId == id);
+
+    
+    foreach (var cityDto in updatedWalker.Cities)
+    {
+        var newWC = new WalkerCityDTO
+        {
+            Id = walkerCities.Count > 0 ? walkerCities.Max(wc => wc.Id) + 1 : 1,
+            WalkerId = id,
+            CityId = cityDto.Id
+        };
+        walkerCities.Add(newWC);
+    }
+
+    
+    walker.Cities = updatedWalker.Cities.Select(c => new City
+    {
+        Id = c.Id,
+        Name = c.Name,
+        State = c.State
+    }).ToList();
+
+    return Results.Ok(walker); 
 });
 
 
